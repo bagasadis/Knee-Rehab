@@ -20,7 +20,7 @@
 
   .banner { background:linear-gradient(135deg,#1a2a1a,#1a1d27); border:1px solid rgba(56,217,169,.3); border-radius:16px; padding:16px; margin:14px 0 10px; }
   .banner-label { font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:6px; }
-  .banner-week { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:var(--accent2); line-height:1; }
+  .banner-week { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:var(--accent2); line-height:1; margin-bottom:12px; }
   .banner-sub { font-size:12px; color:var(--muted); margin:2px 0 12px; }
   .stage-box { background:rgba(0,0,0,.3); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
   .stage-label { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin-bottom:3px; }
@@ -154,9 +154,7 @@
 </header>
 
 <div class="banner">
-  <div class="banner-label">🎯 Goal: JRF Next Year</div>
   <div class="banner-week" id="week-num">Week 1</div>
-  <div class="banner-sub" id="week-sub">Training since 24 Aug 2026</div>
   <div class="stage-box">
     <div class="stage-label">Current Run Stage</div>
     <div class="stage-value" id="stage-value">—</div>
@@ -267,13 +265,13 @@
 
   const WARMUP_GYM = [
     {name:'Static Bike (easy)', meta:'3 min', steps:['Hop on the stationary bike','Pedal at an easy, conversational pace','Keep resistance low — goal is blood flow, not effort']},
-    {name:'Bodyweight Squats (shallow)', meta:'10 reps', steps:['Stand feet shoulder-width apart','Bend knees to about 30–45°, hips back','Rise back up with control — don\\'t go deep yet']},
+    {name:'Bodyweight Squats (shallow)', meta:'10 reps', steps:['Stand feet shoulder-width apart','Bend knees to about 30–45°, hips back','Rise back up with control — don\'t go deep yet']},
     {name:'Leg Swings (f/b + side/side)', meta:'10 each', steps:['Hold onto a wall or rack for balance','Swing one leg forward and back in a controlled arc','Switch to side-to-side, then repeat other leg']},
     {name:'Arm Circles', meta:'10+10', steps:['Extend arms out to your sides','Make small circles, gradually increasing size','10 forward, then 10 backward']},
     {name:'Glute Bridges', meta:'10 reps', steps:['Lie on your back, knees bent, feet flat','Squeeze glutes and lift hips until body is straight','Hold briefly, lower with control']},
   ];
   const COOLDOWN_GYM = [
-    {name:'Walk / easy bike', meta:'3 min', steps:['Walk around or pedal very lightly','Let your heart rate settle gradually','Breathe normally, don\\'t stop abruptly']},
+    {name:'Walk / easy bike', meta:'3 min', steps:['Walk around or pedal very lightly','Let your heart rate settle gradually','Breathe normally, don\'t stop abruptly']},
     {name:'Quad Stretch', meta:'30s/leg', steps:['Stand holding a wall for balance','Grab your ankle, pull heel toward glutes','Keep knees together, hold gently']},
     {name:'Hamstring Stretch', meta:'30s/leg', steps:['Sit or stand, extend one leg out','Hinge forward from the hips, back flat','Reach toward your toes until you feel a stretch']},
     {name:'Hip Flexor Stretch', meta:'30s/leg', steps:['Step into a half-kneeling lunge position','Push hips forward gently','Keep torso upright, feel stretch in front of hip']},
@@ -289,7 +287,7 @@
     {name:'2–3 Easy Strides', meta:'20m each', steps:['Jog 20m, building from easy to a comfortable pace','Walk back and repeat 2–3 times']},
   ];
   const COOLDOWN_RUN = [
-    {name:'Walk it out', meta:'3–5 min', steps:['Slow to a walk immediately after finishing','Keep walking a few minutes, don\\'t stop abruptly']},
+    {name:'Walk it out', meta:'3–5 min', steps:['Slow to a walk immediately after finishing','Keep walking a few minutes, don\'t stop abruptly']},
     {name:'Quad Stretch', meta:'30s/leg', steps:['Stand holding a wall for balance','Grab your ankle, pull heel toward glutes','Keep knees together, hold gently']},
     {name:'Hamstring Stretch', meta:'30s/leg', steps:['Sit or stand, extend one leg out','Hinge forward from the hips, back flat','Reach toward your toes until you feel a stretch']},
     {name:'IT Band Stretch', meta:'30s/leg', steps:['Cross one leg behind the other','Lean your hip out to the side','Hold gently, feel the stretch on your outer thigh']},
@@ -298,11 +296,11 @@
   ];
 
   const PUSH_MAIN = [
-    {name:'Cable Chest Press', meta:'3×12', min:'~8 min', tip:'Controlled tempo, squeeze at end', steps:['Set cable handles at chest height','Press forward until arms extend, squeeze chest','Return with control — don\\'t let the weight slam']},
+    {name:'Cable Chest Press', meta:'3×12', min:'~8 min', tip:'Controlled tempo, squeeze at end', steps:['Set cable handles at chest height','Press forward until arms extend, squeeze chest','Return with control — don\'t let the weight slam']},
     {name:'Dumbbell Shoulder Press', meta:'3×10', min:'~8 min', tip:'Avoid arching lower back', steps:['Sit or stand, dumbbells at shoulder height','Press straight overhead until arms extend','Lower with control, avoid arching your back']},
     {name:'Incline Dumbbell Press', meta:'3×12', min:'~7 min', steps:['Set bench to a 30–45° incline','Press dumbbells up until arms extend','Lower slowly until you feel a stretch in your chest']},
     {name:'Cable Tricep Pushdown', meta:'3×15', min:'~7 min', steps:['Grip the cable bar at chest height','Push down until arms fully extend','Keep elbows pinned to your sides throughout']},
-    {name:'Plank', meta:'3×30–45s', min:'~5 min', tip:'Core finisher', steps:['Forearms and toes on the floor','Keep body in a straight line, core tight','Hold — don\\'t let hips sag or pike up']},
+    {name:'Plank', meta:'3×30–45s', min:'~5 min', tip:'Core finisher', steps:['Forearms and toes on the floor','Keep body in a straight line, core tight','Hold — don\'t let hips sag or pike up']},
   ];
   const LEGS_MAIN = [
     {name:'Goblet Squat (shallow, 45°)', meta:'3×12', min:'~7 min', tip:'Controlled — no deep bend yet', steps:['Hold a dumbbell close to your chest','Squat down to about 45° knee bend only','Push through heels to stand back up']},
