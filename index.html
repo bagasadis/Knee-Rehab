@@ -3,601 +3,576 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Knee Rehab — Bagas</title>
+<title>Bagas's Training Program</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
   :root {
-    --bg: #0f1117; --surface: #1a1d27; --surface2: #222534;
-    --accent: #4f9cf9; --accent2: #38d9a9; --warn: #ffa94d;
-    --danger: #ff6b6b; --text: #e8eaf0; --muted: #8b8fa8; --border: #2a2d3e;
+    --bg:#0f1117; --surface:#1a1d27; --surface2:#222534;
+    --accent:#4f9cf9; --accent2:#38d9a9; --warn:#ffa94d; --danger:#ff6b6b;
+    --text:#e8eaf0; --muted:#8b8fa8; --border:#2a2d3e;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 16px; font-size: 14px; }
-  header { text-align: center; padding: 20px 0 16px; }
-  .header-tag { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  h1 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
-  .subtitle { color: var(--muted); font-size: 12px; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; padding:16px; font-size:14px; }
+  header { text-align:center; padding:20px 0 14px; }
+  .header-tag { font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  h1 { font-family:'Space Grotesk',sans-serif; font-size:23px; font-weight:700; line-height:1.2; margin-bottom:4px; }
+  .subtitle { color:var(--muted); font-size:12px; }
 
-  /* HM Banner */
-  .hm-banner { background: linear-gradient(135deg,#1a2a1a,#1a1d27); border: 1px solid rgba(56,217,169,0.3); border-radius: 16px; padding: 16px; margin: 14px 0 10px; position: relative; overflow: hidden; }
-  .hm-banner::before { content: '🏁'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 40px; opacity: 0.15; }
-  .hm-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px; }
-  .hm-days { font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; color: var(--accent2); line-height: 1; margin-bottom: 2px; }
-  .hm-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-  .hm-phases { display: flex; gap: 6px; }
-  .hm-phase { flex: 1; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 7px 6px; text-align: center; border: 1px solid var(--border); position: relative; overflow: hidden; }
-  .hm-phase.current { border-color: rgba(79,156,249,0.4); background: rgba(79,156,249,0.08); }
-  .hm-phase.current::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
-  .phase-name { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
-  .phase-date { font-size: 10px; color: var(--text); font-weight: 600; margin-top: 2px; }
-  .phase-status { font-size: 9px; color: var(--accent); margin-top: 1px; }
+  .banner { background:linear-gradient(135deg,#1a2a1a,#1a1d27); border:1px solid rgba(56,217,169,.3); border-radius:16px; padding:16px; margin:14px 0 10px; }
+  .banner-label { font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:6px; }
+  .banner-week { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; color:var(--accent2); line-height:1; }
+  .banner-sub { font-size:12px; color:var(--muted); margin:2px 0 12px; }
+  .stage-box { background:rgba(0,0,0,.3); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
+  .stage-label { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin-bottom:3px; }
+  .stage-value { font-size:13px; font-weight:600; color:var(--text); }
+  .stage-detail { font-size:11px; color:var(--muted); margin-top:1px; }
 
-  /* Stats */
-  .stats-row { display: flex; gap: 8px; margin: 10px 0; }
-  .stat-card { flex: 1; background: var(--surface); border-radius: 12px; padding: 12px 10px; text-align: center; border: 1px solid var(--border); }
-  .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 3px; }
-  .stat-value.green { color: var(--accent2); }
-  .stat-value.orange { color: var(--warn); }
-  .stat-label { font-size: 10px; color: var(--muted); font-weight: 500; }
+  .stats-row { display:flex; gap:8px; margin:10px 0; }
+  .stat-card { flex:1; background:var(--surface); border-radius:12px; padding:12px 10px; text-align:center; border:1px solid var(--border); }
+  .stat-value { font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:var(--accent); line-height:1; margin-bottom:3px; }
+  .stat-value.green { color:var(--accent2); }
+  .stat-value.orange { color:var(--warn); }
+  .stat-label { font-size:10px; color:var(--muted); font-weight:500; }
 
-  /* Heatmap */
-  .heatmap-card { background: var(--surface); border-radius: 16px; padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); }
-  .heatmap-title { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-  .heatmap-legend { display: flex; align-items: center; gap: 4px; font-size: 9px; color: var(--muted); }
-  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
-  .heatmap-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .day-label { font-size: 9px; color: var(--muted); text-align: center; padding-bottom: 4px; font-weight: 600; }
-  .day-cell { aspect-ratio: 1; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--muted); transition: all 0.15s; }
-  .day-cell.done { background: rgba(56,217,169,0.25); border-color: rgba(56,217,169,0.5); color: var(--accent2); }
-  .day-cell.today { border-color: var(--accent); color: var(--accent); font-weight: 700; }
-  .day-cell.today.done { background: rgba(56,217,169,0.25); border-color: var(--accent2); color: var(--accent2); }
-  .day-cell.future { opacity: 0.3; }
-  .day-cell.empty { background: transparent; border-color: transparent; }
+  .heatmap-card { background:var(--surface); border-radius:16px; padding:14px; margin-bottom:10px; border:1px solid var(--border); }
+  .heatmap-title { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+  .heatmap-legend { display:flex; align-items:center; gap:4px; font-size:9px; color:var(--muted); }
+  .legend-dot { width:8px; height:8px; border-radius:2px; }
+  .heatmap-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .day-label { font-size:9px; color:var(--muted); text-align:center; padding-bottom:4px; font-weight:600; }
+  .day-cell { aspect-ratio:1; border-radius:4px; background:var(--surface2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--muted); }
+  .day-cell.done { background:rgba(56,217,169,.25); border-color:rgba(56,217,169,.5); color:var(--accent2); }
+  .day-cell.today { border-color:var(--accent); color:var(--accent); font-weight:700; }
+  .day-cell.today.done { background:rgba(56,217,169,.25); border-color:var(--accent2); color:var(--accent2); }
+  .day-cell.future { opacity:.3; }
+  .day-cell.rest { opacity:.35; }
+  .day-cell.empty { background:transparent; border-color:transparent; }
 
-  /* Tabs */
-  .tabs { display: flex; gap: 6px; margin: 14px 0 12px; background: var(--surface); padding: 4px; border-radius: 12px; }
-  .tab { flex: 1; padding: 8px 4px; border: none; border-radius: 9px; background: transparent; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
-  .tab.active { background: var(--surface2); color: var(--text); }
-  .tab-phase { font-size: 9px; display: block; font-weight: 400; color: var(--muted); margin-top: 2px; }
-  .tab.active .tab-phase { color: var(--accent); }
-  .panel { display: none; }
-  .panel.active { display: block; }
+  .tabs { display:flex; gap:5px; margin:14px 0 12px; background:var(--surface); padding:4px; border-radius:12px; }
+  .tab { flex:1; padding:9px 2px; border:none; border-radius:9px; background:transparent; color:var(--muted); font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600; cursor:pointer; text-align:center; }
+  .tab.active { background:var(--surface2); color:var(--text); }
+  .panel { display:none; }
+  .panel.active { display:block; }
 
-  /* Phase Toggle */
-  .phase-toggle { display: flex; background: var(--surface); border-radius: 12px; padding: 4px; margin-bottom: 12px; border: 1px solid var(--border); }
-  .ptoggle-btn { flex: 1; padding: 9px 8px; border: none; border-radius: 9px; background: transparent; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
-  .ptoggle-btn.active { background: var(--surface2); color: var(--text); }
-  .ptoggle-btn.p1.active { color: var(--accent); }
-  .ptoggle-btn.p2.active { color: var(--warn); }
-  .phase-content { display: none; }
-  .phase-content.active { display: block; }
+  .day-pills { display:flex; gap:5px; margin-bottom:12px; overflow-x:auto; }
+  .day-pill { flex:1; min-width:42px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:8px 2px; text-align:center; cursor:pointer; }
+  .day-pill.selected { background:var(--surface2); border-color:var(--accent); }
+  .day-pill.selected.rest-type { border-color:var(--muted); }
+  .pill-day { font-size:10px; font-weight:700; color:var(--text); }
+  .pill-type { font-size:8px; color:var(--muted); margin-top:2px; }
+  .day-pill.selected .pill-type { color:var(--accent); }
+  .day-pill.is-today { position:relative; }
+  .day-pill.is-today::after { content:''; position:absolute; top:3px; right:3px; width:5px; height:5px; border-radius:50%; background:var(--accent2); }
 
-  /* Schedule */
-  .schedule-card { background: var(--surface); border-radius: 16px; padding: 16px; margin-bottom: 10px; border: 1px solid var(--border); }
-  .schedule-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-  .schedule-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .checklist-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
-  .checklist-row:last-child { border-bottom: none; }
-  .check-box { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 11px; color: transparent; }
-  .checklist-row.done .check-box { background: var(--accent2); border-color: var(--accent2); color: white; }
-  .checklist-row.done .check-label { text-decoration: line-through; color: var(--muted); }
-  .check-label { font-size: 13px; font-weight: 500; }
-  .check-meta { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .session-head { background:var(--surface); border-radius:16px; padding:14px 16px; margin-bottom:10px; border:1px solid var(--border); text-align:center; }
+  .session-title { font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; }
+  .session-time { font-size:11px; color:var(--accent2); margin-top:3px; font-weight:600; }
+  .session-note { font-size:11px; color:var(--muted); margin-top:6px; }
 
-  .done-btn { width: 100%; margin-top: 12px; padding: 12px; background: linear-gradient(135deg, rgba(56,217,169,0.2), rgba(79,156,249,0.2)); border: 1px solid rgba(56,217,169,0.4); border-radius: 12px; color: var(--accent2); font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-  .done-btn:active { opacity: 0.7; transform: scale(0.98); }
-  .done-btn.completed { background: rgba(56,217,169,0.08); color: var(--muted); border-color: var(--border); cursor: default; }
-  .reset-btn { width: 100%; margin-top: 8px; padding: 9px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .rest-card { background:var(--surface); border-radius:16px; padding:24px 16px; margin-bottom:10px; border:1px solid var(--border); text-align:center; }
+  .rest-emoji { font-size:32px; margin-bottom:8px; }
+  .rest-text { font-size:13px; color:var(--muted); line-height:1.6; }
 
-  /* Exercise Cards */
-  .exercise-card { background: var(--surface); border-radius: 16px; padding: 16px; margin-bottom: 10px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-  .exercise-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); border-radius: 3px 0 0 3px; }
-  .exercise-card.phase2::before { background: var(--warn); }
-  .ex-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .ex-num { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(79,156,249,0.12); border-radius: 6px; padding: 3px 7px; white-space: nowrap; margin-top: 2px; }
-  .phase2 .ex-num { color: var(--warn); background: rgba(255,169,77,0.12); }
-  .ex-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.3; }
-  .ex-target { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .ex-sets { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .set-badge { background: var(--surface2); border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 500; color: var(--text); border: 1px solid var(--border); }
-  details { margin-top: 8px; }
-  summary { font-size: 12px; font-weight: 600; color: var(--accent); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; user-select: none; }
-  .phase2 summary { color: var(--warn); }
-  summary::before { content: '▶'; font-size: 9px; transition: transform 0.2s; }
-  details[open] summary::before { transform: rotate(90deg); }
-  .steps { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-  .step { display: flex; gap: 8px; align-items: flex-start; }
-  .step-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); font-size: 10px; font-weight: 700; color: var(--muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .step-text { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .section-card { background:var(--surface); border-radius:16px; padding:14px 16px; margin-bottom:10px; border:1px solid var(--border); }
+  .section-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .section-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent2); }
+  .section-time { font-size:10px; color:var(--muted); background:var(--surface2); padding:3px 8px; border-radius:6px; border:1px solid var(--border); }
+  .section-card.main .section-title { color:var(--accent); }
+  .section-card.cooldown .section-title { color:var(--warn); }
 
-  /* Rules */
-  .rules-card { background: var(--surface); border-radius: 16px; padding: 16px; margin-bottom: 10px; border: 1px solid var(--border); }
-  .rules-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
-  .rule-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; font-size: 12px; line-height: 1.5; }
-  .rule-icon { font-size: 14px; flex-shrink: 0; margin-top: -1px; }
+  .wo-row { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+  .wo-row:last-child { border-bottom:none; }
+  .wo-check { width:19px; height:19px; border-radius:6px; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:10px; color:transparent; }
+  .wo-row.done .wo-check { background:var(--accent2); border-color:var(--accent2); color:white; }
+  .wo-row.done .wo-name { text-decoration:line-through; color:var(--muted); }
+  .wo-body { flex:1; }
+  .wo-name { font-size:13px; font-weight:600; }
+  .wo-tip { font-size:10.5px; color:var(--muted); margin-top:1px; }
+  .wo-meta { display:flex; flex-direction:column; align-items:flex-end; gap:2px; }
+  .wo-sets { font-size:11px; font-weight:600; color:var(--text); background:var(--surface2); padding:2px 7px; border-radius:5px; border:1px solid var(--border); white-space:nowrap; }
+  .wo-min { font-size:9px; color:var(--muted); }
+
+  .interval-card { background:rgba(79,156,249,.08); border:1px solid rgba(79,156,249,.25); border-radius:12px; padding:12px; margin-bottom:4px; }
+  .interval-stage { font-size:10px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .interval-main { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; margin:4px 0 2px; }
+  .interval-sub { font-size:11px; color:var(--muted); }
+
+  .done-btn { width:100%; margin-top:4px; padding:12px; background:linear-gradient(135deg, rgba(56,217,169,.2), rgba(79,156,249,.2)); border:1px solid rgba(56,217,169,.4); border-radius:12px; color:var(--accent2); font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; cursor:pointer; }
+  .done-btn.completed { background:rgba(56,217,169,.08); color:var(--muted); border-color:var(--border); }
+  .preview-note { text-align:center; font-size:11px; color:var(--muted); margin-top:8px; padding:8px; background:var(--surface); border-radius:10px; border:1px solid var(--border); }
+
+  .sched-card { background:var(--surface); border-radius:16px; padding:6px 16px; margin-bottom:10px; border:1px solid var(--border); }
+  .sched-row { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .sched-row:last-child { border-bottom:none; }
+  .sched-day { width:38px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; }
+  .sched-info { flex:1; }
+  .sched-type { font-size:13px; font-weight:600; }
+  .sched-detail { font-size:11px; color:var(--muted); margin-top:1px; }
+  .sched-badge { font-size:9px; padding:3px 8px; border-radius:6px; font-weight:700; text-transform:uppercase; white-space:nowrap; }
+  .badge-rest { background:var(--surface2); color:var(--muted); }
+  .badge-push { background:rgba(79,156,249,.15); color:var(--accent); }
+  .badge-legs { background:rgba(255,169,77,.15); color:var(--warn); }
+  .badge-pull { background:rgba(79,156,249,.15); color:var(--accent); }
+  .badge-run { background:rgba(56,217,169,.15); color:var(--accent2); }
+
+  .rules-card { background:var(--surface); border-radius:16px; padding:16px; margin-bottom:10px; border:1px solid var(--border); }
+  .rules-title { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; margin-bottom:12px; }
+  .rule-item { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; font-size:12px; line-height:1.5; }
+  .rule-icon { font-size:14px; flex-shrink:0; margin-top:-1px; }
+  details.ref { margin-top:4px; }
+  details.ref summary { font-size:12px; font-weight:600; color:var(--accent); cursor:pointer; list-style:none; }
+  details.ref summary::before { content:'▶ '; font-size:9px; }
+  details.ref[open] summary::before { content:'▼ '; }
+  .ref-item { font-size:12px; padding:8px 0; border-bottom:1px solid var(--border); }
+  .ref-item:last-child { border-bottom:none; }
+  .ref-item b { font-weight:600; }
+  .ref-item span { color:var(--muted); font-size:11px; }
+
+  /* Guide tab */
+  .guide-section-label { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:16px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  .guide-section-label:first-child { margin-top:0; }
+  .g-card { background:var(--surface); border-radius:14px; padding:13px 15px; margin-bottom:8px; border:1px solid var(--border); }
+  .g-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .g-name { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13.5px; }
+  .g-badge { font-size:10.5px; font-weight:600; color:var(--text); background:var(--surface2); padding:2px 8px; border-radius:5px; border:1px solid var(--border); white-space:nowrap; }
+  details.g-details { margin-top:8px; }
+  details.g-details summary { font-size:11.5px; font-weight:600; color:var(--accent); cursor:pointer; list-style:none; user-select:none; }
+  details.g-details summary::before { content:'▶ How to do it'; font-size:11.5px; }
+  details.g-details[open] summary::before { content:'▼ How to do it'; }
+  .g-steps { margin-top:9px; display:flex; flex-direction:column; gap:6px; }
+  .g-step { display:flex; gap:8px; align-items:flex-start; }
+  .g-dot { width:17px; height:17px; border-radius:50%; background:var(--surface2); border:1px solid var(--border); font-size:9px; font-weight:700; color:var(--muted); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+  .g-text { font-size:12px; color:var(--text); line-height:1.5; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-tag">Knee Rehab Program</div>
-  <h1>Bagas's Recovery 🦵</h1>
-  <p class="subtitle">Meniscus Tear + Low Grade Partial ACL</p>
+  <div class="header-tag">Training Program</div>
+  <h1>Bagas's Weekly Plan 🏃💪</h1>
+  <p class="subtitle">Return-to-Running + Full Body Fitness</p>
 </header>
 
-<!-- HM Countdown -->
-<div class="hm-banner">
-  <div class="hm-label">🏃 First Half Marathon</div>
-  <div class="hm-days" id="days-left">—</div>
-  <div class="hm-sub" id="hm-date-sub">Loading...</div>
-  <div class="hm-phases">
-    <div class="hm-phase current">
-      <div class="phase-name">Protect</div>
-      <div class="phase-date">Jun–Jul</div>
-      <div class="phase-status">● Now</div>
-    </div>
-    <div class="hm-phase">
-      <div class="phase-name">Rebuild</div>
-      <div class="phase-date">Jul–Aug</div>
-      <div class="phase-status" style="color:var(--muted)">After Dr.</div>
-    </div>
-    <div class="hm-phase">
-      <div class="phase-name">Train</div>
-      <div class="phase-date">Aug–Sep</div>
-      <div class="phase-status" style="color:var(--muted)">Running</div>
-    </div>
-    <div class="hm-phase">
-      <div class="phase-name">Race 🏁</div>
-      <div class="phase-date">24 Oct</div>
-      <div class="phase-status" style="color:var(--warn)">Goal</div>
-    </div>
+<div class="banner">
+  <div class="banner-label">🎯 Goal: JRF Next Year</div>
+  <div class="banner-week" id="week-num">Week 1</div>
+  <div class="banner-sub" id="week-sub">Training since 24 Aug 2026</div>
+  <div class="stage-box">
+    <div class="stage-label">Current Run Stage</div>
+    <div class="stage-value" id="stage-value">—</div>
+    <div class="stage-detail" id="stage-detail">—</div>
   </div>
 </div>
 
-<!-- Stats -->
 <div class="stats-row">
-  <div class="stat-card">
-    <div class="stat-value green" id="stat-streak">0</div>
-    <div class="stat-label">Day Streak 🔥</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value" id="stat-total">0</div>
-    <div class="stat-label">Total Days Done</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-value orange" id="stat-week">0/7</div>
-    <div class="stat-label">This Week</div>
-  </div>
+  <div class="stat-card"><div class="stat-value green" id="stat-streak">0</div><div class="stat-label">Day Streak 🔥</div></div>
+  <div class="stat-card"><div class="stat-value" id="stat-total">0</div><div class="stat-label">Total Sessions</div></div>
+  <div class="stat-card"><div class="stat-value orange" id="stat-week">0/5</div><div class="stat-label">This Week</div></div>
 </div>
 
-<!-- Heatmap -->
 <div class="heatmap-card">
-  <div class="heatmap-title">
-    Exercise History
+  <div class="heatmap-title">Training History
     <div class="heatmap-legend">
       <div class="legend-dot" style="background:var(--surface2);border:1px solid var(--border)"></div> None
-      <div class="legend-dot" style="background:rgba(56,217,169,0.4);margin-left:4px"></div> Done
+      <div class="legend-dot" style="background:rgba(56,217,169,.4);margin-left:4px"></div> Done
     </div>
   </div>
   <div class="heatmap-grid" id="heatmap"></div>
 </div>
 
-<!-- Main Tabs -->
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('daily')">✓ Daily<span class="tab-phase">Checklist</span></button>
-  <button class="tab" onclick="switchTab('phase1')">Phase 1<span class="tab-phase">Do Now</span></button>
-  <button class="tab" onclick="switchTab('phase2')">Phase 2<span class="tab-phase">After Dr.</span></button>
-  <button class="tab" onclick="switchTab('rules')">Rules<span class="tab-phase">Important</span></button>
+  <button class="tab active" onclick="switchTab('today')">Today</button>
+  <button class="tab" onclick="switchTab('guide')">Guide</button>
+  <button class="tab" onclick="switchTab('schedule')">Schedule</button>
+  <button class="tab" onclick="switchTab('knee')">Knee Care</button>
 </div>
 
-<!-- DAILY TAB -->
-<div class="panel active" id="panel-daily">
-
-  <!-- Phase Toggle -->
-  <div class="phase-toggle">
-    <button class="ptoggle-btn p1 active" onclick="switchPhase('p1')">📋 Phase 1 Exercises</button>
-    <button class="ptoggle-btn p2" onclick="switchPhase('p2')">📋 Phase 2 Exercises</button>
-  </div>
-
-  <!-- Phase 1 Daily -->
-  <div class="phase-content active" id="daily-p1">
-    <div class="schedule-card">
-      <div class="schedule-label">🌅 Morning</div>
-      <div id="checklist-morning-p1"></div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-label">🌆 Evening</div>
-      <div id="checklist-evening-p1"></div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-label">❄️ After Any Walking</div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Ice knee 15–20 mins</div><div class="check-meta">Daily</div></div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Check for swelling</div><div class="check-meta">Daily</div></div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Wear compression sleeve</div><div class="check-meta">Outside</div></div>
-    </div>
-  </div>
-
-  <!-- Phase 2 Daily -->
-  <div class="phase-content" id="daily-p2">
-    <p style="font-size:12px;color:var(--warn);margin-bottom:12px;padding:10px;background:rgba(255,169,77,0.08);border-radius:10px;border:1px solid rgba(255,169,77,0.2)">⚠️ Only use this after doctor clearance</p>
-    <div class="schedule-card">
-      <div class="schedule-label">🌅 Morning</div>
-      <div id="checklist-morning-p2"></div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-label">🌆 Evening</div>
-      <div id="checklist-evening-p2"></div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-label">❄️ After Any Walking</div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Ice knee 15–20 mins</div><div class="check-meta">Daily</div></div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Check for swelling</div><div class="check-meta">Daily</div></div>
-      <div class="checklist-row" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-label">Wear compression sleeve</div><div class="check-meta">Outside</div></div>
-    </div>
-  </div>
-
-  <button class="done-btn" id="done-btn" onclick="markDayDone()">✓ Mark Today as Complete</button>
-  <button class="reset-btn" onclick="resetChecklist()">↺ Reset Today's Checklist</button>
+<!-- TODAY -->
+<div class="panel active" id="panel-today">
+  <div class="day-pills" id="day-pills"></div>
+  <div id="session-content"></div>
 </div>
 
-<!-- PHASE 1 REFERENCE TAB -->
-<div class="panel" id="panel-phase1">
-  <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">✅ Do these NOW — before your doctor visit. Twice daily.</p>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#1</div><div><div class="ex-name">Quad Sets</div><div class="ex-target">Quadriceps activation</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">15 reps</div><div class="set-badge">Hold 10 sec</div><div class="set-badge">2× daily</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Sit or lie with leg straight</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Roll small towel under knee</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Squeeze quad, push knee into towel</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 10 seconds, then relax</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#2</div><div><div class="ex-name">Straight Leg Raises</div><div class="ex-target">Quads + hip flexors</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">12 reps</div><div class="set-badge">Hold 5 sec</div><div class="set-badge">2× daily</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie flat on your back</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Bend good leg, keep injured leg straight</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Squeeze quad first, then lift to 45°</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 5 seconds, lower slowly</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#3</div><div><div class="ex-name">Calf Raises</div><div class="ex-target">Calves + impact absorption</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">15 reps</div><div class="set-badge">Hold 2 sec</div><div class="set-badge">Daily</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Stand holding wall for balance</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Rise slowly on tiptoes</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Hold 2 seconds at top</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Lower slowly and controlled</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#4</div><div><div class="ex-name">Glute Bridges</div><div class="ex-target">Glutes + knee alignment</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">12 reps</div><div class="set-badge">Hold 5 sec</div><div class="set-badge">Daily</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie on back, both knees bent</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Feet flat, hip-width apart</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Squeeze glutes, lift hips until straight</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 5 seconds, lower slowly</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#5</div><div><div class="ex-name">Clamshells</div><div class="ex-target">Hip abductors + knee stability</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">15 reps</div><div class="set-badge">Hold 3 sec</div><div class="set-badge">Each side</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie on side, hips stacked</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Knees bent at 45°, feet together</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Lift top knee like a clamshell opening</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 3 seconds, lower slowly</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#6</div><div><div class="ex-name">Side-Lying Leg Raises</div><div class="ex-target">Hip abductors</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">12 reps</div><div class="set-badge">Hold 3 sec</div><div class="set-badge">Each side</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie on side, body straight</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Toes pointing forward</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Lift top leg to ~45°</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 3 seconds, lower slowly</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card">
-    <div class="ex-header"><div class="ex-num">#7</div><div><div class="ex-name">Prone Heel Slides</div><div class="ex-target">Hamstrings + range of motion</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">10 reps</div><div class="set-badge">Hold 5 sec</div><div class="set-badge">Daily</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie on your stomach, legs straight</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Slowly bend injured knee</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Bring heel toward glutes — only as far as comfortable</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 5 seconds, straighten slowly</div></div>
-    </div></details>
-  </div>
+<!-- GUIDE -->
+<div class="panel" id="panel-guide">
+  <p style="font-size:12px;color:var(--muted);margin-bottom:4px;">Tap any exercise to see how to do it properly.</p>
+  <div id="guide-content"></div>
 </div>
 
-<!-- PHASE 2 REFERENCE TAB -->
-<div class="panel" id="panel-phase2">
-  <p style="font-size:12px;color:var(--warn);margin-bottom:12px;">⚠️ Start ONLY after doctor clearance (weeks 4–8)</p>
-  <div class="exercise-card phase2">
-    <div class="ex-header"><div class="ex-num">#8</div><div><div class="ex-name">Short Arc Quads</div><div class="ex-target">Quads end range</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">15 reps</div><div class="set-badge">Hold 5 sec</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Lie on back, roll towel under knee (~40°)</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Straighten knee from that bent position only</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Hold 5 seconds at top</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Lower slowly back to start</div></div>
-    </div></details>
+<!-- SCHEDULE -->
+<div class="panel" id="panel-schedule">
+  <div class="sched-card">
+    <div class="sched-row"><div class="sched-day">Mon</div><div class="sched-info"><div class="sched-type">Rest</div><div class="sched-detail">Full recovery day</div></div><div class="sched-badge badge-rest">Rest</div></div>
+    <div class="sched-row"><div class="sched-day">Tue</div><div class="sched-info"><div class="sched-type">Push — Upper Body A</div><div class="sched-detail">Office gym · 6–7 PM</div></div><div class="sched-badge badge-push">Gym</div></div>
+    <div class="sched-row"><div class="sched-day">Wed</div><div class="sched-info"><div class="sched-type">Legs — Knee Focus</div><div class="sched-detail">Office gym · 6–7 PM</div></div><div class="sched-badge badge-legs">Gym</div></div>
+    <div class="sched-row"><div class="sched-day">Thu</div><div class="sched-info"><div class="sched-type">Pull — Upper Body B</div><div class="sched-detail">Office gym · 6–7 PM</div></div><div class="sched-badge badge-pull">Gym</div></div>
+    <div class="sched-row"><div class="sched-day">Fri</div><div class="sched-info"><div class="sched-type">Run — Club</div><div class="sched-detail">6:30–7:30 AM + coffee chat</div></div><div class="sched-badge badge-run">Run</div></div>
+    <div class="sched-row"><div class="sched-day">Sat</div><div class="sched-info"><div class="sched-type">Rest</div><div class="sched-detail">Full recovery day</div></div><div class="sched-badge badge-rest">Rest</div></div>
+    <div class="sched-row"><div class="sched-day">Sun</div><div class="sched-info"><div class="sched-type">Run — CFD Sudirman</div><div class="sched-detail">Easy pace, no rush</div></div><div class="sched-badge badge-run">Run</div></div>
   </div>
-  <div class="exercise-card phase2">
-    <div class="ex-header"><div class="ex-num">#9</div><div><div class="ex-name">Wall Sits (Shallow)</div><div class="ex-target">Quads + glutes</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">Hold 30 sec</div><div class="set-badge">20–30° only</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Stand with back flat against wall</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Slide down to 20–30° only — very shallow</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">NOT a full squat</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Hold 20–30 seconds</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card phase2">
-    <div class="ex-header"><div class="ex-num">#10</div><div><div class="ex-name">Terminal Knee Extensions</div><div class="ex-target">Quads + ACL support</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">15 reps</div><div class="set-badge">With band</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Loop resistance band around fixed object</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Loop other end behind your knee</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Stand facing anchor point</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Straighten knee against band, hold 2 sec</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card phase2">
-    <div class="ex-header"><div class="ex-num">#11</div><div><div class="ex-name">Single Leg Glute Bridge</div><div class="ex-target">Glutes + stability</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">10 reps</div><div class="set-badge">Injured leg</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Same as glute bridge position</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Lift good leg off floor</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">All weight through injured leg</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Lift hips, hold 5 sec, lower slowly</div></div>
-    </div></details>
-  </div>
-  <div class="exercise-card phase2">
-    <div class="ex-header"><div class="ex-num">#12</div><div><div class="ex-name">Standing Hamstring Curls</div><div class="ex-target">Hamstrings + ACL protection</div></div></div>
-    <div class="ex-sets"><div class="set-badge">3 sets</div><div class="set-badge">12 reps</div><div class="set-badge">Slow & controlled</div></div>
-    <details><summary>How to do it</summary><div class="steps">
-      <div class="step"><div class="step-dot">1</div><div class="step-text">Stand holding wall for balance</div></div>
-      <div class="step"><div class="step-dot">2</div><div class="step-text">Bend injured knee, bring heel toward glutes</div></div>
-      <div class="step"><div class="step-dot">3</div><div class="step-text">Hold 3 seconds at top</div></div>
-      <div class="step"><div class="step-dot">4</div><div class="step-text">Lower slowly and controlled</div></div>
-    </div></details>
-  </div>
-</div>
-
-<!-- RULES TAB -->
-<div class="panel" id="panel-rules">
   <div class="rules-card">
-    <div class="rules-title">✅ During Exercise</div>
+    <div class="rules-title">💡 Why This Split Works For You</div>
+    <div class="rule-item"><div class="rule-icon">🦵</div><div>Wednesday's leg day directly trains the muscles that protect your meniscus + ACL (quads, hamstrings, hip abductors), plus balance work — proprioception training is one of the most evidence-backed pieces of ACL rehab, and it's now built in</div></div>
+    <div class="rule-item"><div class="rule-icon">⏱️</div><div>Every gym day is time-boxed to fit your 1-hour office slot: warm-up + workout + cooldown</div></div>
+    <div class="rule-item"><div class="rule-icon">🏃</div><div>Running progresses via run-walk intervals — a standard graduated return-to-running protocol, same idea physios use after this kind of injury</div></div>
+    <div class="rule-item"><div class="rule-icon">📆</div><div>Leg day (Wed) sits 2 days before your next run (Fri), giving your knee time to recover before load-bearing running</div></div>
+    <div class="rule-item"><div class="rule-icon">😴</div><div>Mon + Sat rest days don't break your streak — they're built into the plan, not missed days</div></div>
+  </div>
+</div>
+
+<!-- KNEE CARE -->
+<div class="panel" id="panel-knee">
+  <div class="rules-card">
+    <div class="rules-title">✅ During Any Session</div>
     <div class="rule-item"><div class="rule-icon">💪</div><div>Muscle burn = okay, keep going</div></div>
-    <div class="rule-item"><div class="rule-icon">🛑</div><div>Joint pain = stop immediately</div></div>
-    <div class="rule-item"><div class="rule-icon">⚠️</div><div>Swelling after = you did too much, rest</div></div>
-    <div class="rule-item"><div class="rule-icon">🦵</div><div>Train both legs — not just the injured one</div></div>
+    <div class="rule-item"><div class="rule-icon">🛑</div><div>Joint pain = stop immediately, don't push through</div></div>
+    <div class="rule-item"><div class="rule-icon">⚠️</div><div>Swelling or nyut-nyutan the next morning = you did too much, back off next session</div></div>
   </div>
   <div class="rules-card">
-    <div class="rules-title">❌ Avoid Completely</div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Running or jogging</div></div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Deep squats or lunges</div></div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Cycling — too much knee flexion</div></div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Hiking or uneven terrain</div></div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Sudden pivoting or direction changes</div></div>
-    <div class="rule-item"><div class="rule-icon">🚫</div><div>Sitting cross-legged</div></div>
+    <div class="rules-title">❌ Still Avoid For Now</div>
+    <div class="rule-item"><div class="rule-icon">🚫</div><div>Padel, badminton, or anything with sudden pivots/lateral cuts</div></div>
+    <div class="rule-item"><div class="rule-icon">🚫</div><div>Deep squats (below 45°) or deep lunges</div></div>
+    <div class="rule-item"><div class="rule-icon">🚫</div><div>Hiking downhill / uneven terrain</div></div>
+    <div class="rule-item"><div class="rule-icon">🚫</div><div>Skipping warm-up before running — cold joints jumping into jogging is asking for re-injury</div></div>
   </div>
   <div class="rules-card">
-    <div class="rules-title">🚨 See Doctor Urgently If</div>
-    <div class="rule-item"><div class="rule-icon">🔴</div><div>Knee locks completely and won't straighten</div></div>
-    <div class="rule-item"><div class="rule-icon">🔴</div><div>Sudden significant swelling returns</div></div>
-    <div class="rule-item"><div class="rule-icon">🔴</div><div>Sharp pain at rest</div></div>
-    <div class="rule-item"><div class="rule-icon">🔴</div><div>Knee gives way while just walking</div></div>
-    <div class="rule-item"><div class="rule-icon">🔴</div><div>Numbness or tingling in leg</div></div>
+    <div class="rules-title">🚨 See Doctor / Physio Sooner If</div>
+    <div class="rule-item"><div class="rule-icon">🔴</div><div>Knee locks and won't straighten</div></div>
+    <div class="rule-item"><div class="rule-icon">🔴</div><div>Sudden swelling returns</div></div>
+    <div class="rule-item"><div class="rule-icon">🔴</div><div>Knee gives way during normal walking</div></div>
+    <div class="rule-item"><div class="rule-icon">🔴</div><div>Pain returns even at rest, not just after activity</div></div>
   </div>
-  <div class="rules-card" style="border-color:rgba(79,156,249,0.3)">
-    <div class="rules-title">💡 Daily Habits</div>
-    <div class="rule-item"><div class="rule-icon">❄️</div><div>Ice 15–20 mins, 2–3× daily</div></div>
-    <div class="rule-item"><div class="rule-icon">🦺</div><div>Wear compression sleeve outside</div></div>
-    <div class="rule-item"><div class="rule-icon">🛋️</div><div>Elevate leg when resting</div></div>
-    <div class="rule-item"><div class="rule-icon">🐟</div><div>Eat omega-3, turmeric, collagen</div></div>
-    <div class="rule-item"><div class="rule-icon">📝</div><div>Note pain level (1–10) daily</div></div>
+  <div class="rules-card" style="border-color:rgba(79,156,249,.3)">
+    <div class="rules-title">📋 Ongoing Care</div>
+    <div class="rule-item"><div class="rule-icon">🏥</div><div>Keep your monthly physio visits going even as running resumes</div></div>
+    <div class="rule-item"><div class="rule-icon">❄️</div><div>Ice 15–20 min after any session that leaves the knee feeling warm or achy</div></div>
+    <div class="rule-item"><div class="rule-icon">💊</div><div>Welmove + Omega-3 daily, taken with meals</div></div>
+    <details class="ref">
+      <summary>Backup: Gentle exercises for a flare-up day</summary>
+      <div class="ref-item"><b>Quad Sets</b> — <span>3×15, hold 10s. Sit with leg straight, push knee into a rolled towel.</span></div>
+      <div class="ref-item"><b>Straight Leg Raises</b> — <span>3×12, hold 5s. Lie flat, lift straight leg to 45°.</span></div>
+      <div class="ref-item"><b>Glute Bridges</b> — <span>3×12, hold 5s. Lie on back, lift hips, squeeze glutes.</span></div>
+      <div class="ref-item"><b>Prone Heel Slides</b> — <span>3×10. Lie on stomach, bend knee, heel toward glutes.</span></div>
+      <div class="ref-item" style="color:var(--muted)">Swap today's planned session for these 4 if the knee feels off — resume normal plan once it settles.</div>
+    </details>
   </div>
 </div>
 
 <script>
-  const RACE_DATE = new Date('2026-10-24');
-  const STORAGE_KEY = 'bagas-rehab-history';
+  const START_DATE = new Date('2026-08-24'); // Monday — week 1 day 1
+  const STORAGE_KEY = 'bagas-training-history';
+  const DAY_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const DAY_TYPE = ['run','rest','push','legs','pull','run','rest']; // index = getDay()
+  const TYPE_LABEL = { run:'Run', rest:'Rest', push:'Push', legs:'Legs', pull:'Pull' };
 
-  // ---- Countdown ----
-  function updateCountdown() {
+  const WARMUP_GYM = [
+    {name:'Static Bike (easy)', meta:'3 min', steps:['Hop on the stationary bike','Pedal at an easy, conversational pace','Keep resistance low — goal is blood flow, not effort']},
+    {name:'Bodyweight Squats (shallow)', meta:'10 reps', steps:['Stand feet shoulder-width apart','Bend knees to about 30–45°, hips back','Rise back up with control — don\\'t go deep yet']},
+    {name:'Leg Swings (f/b + side/side)', meta:'10 each', steps:['Hold onto a wall or rack for balance','Swing one leg forward and back in a controlled arc','Switch to side-to-side, then repeat other leg']},
+    {name:'Arm Circles', meta:'10+10', steps:['Extend arms out to your sides','Make small circles, gradually increasing size','10 forward, then 10 backward']},
+    {name:'Glute Bridges', meta:'10 reps', steps:['Lie on your back, knees bent, feet flat','Squeeze glutes and lift hips until body is straight','Hold briefly, lower with control']},
+  ];
+  const COOLDOWN_GYM = [
+    {name:'Walk / easy bike', meta:'3 min', steps:['Walk around or pedal very lightly','Let your heart rate settle gradually','Breathe normally, don\\'t stop abruptly']},
+    {name:'Quad Stretch', meta:'30s/leg', steps:['Stand holding a wall for balance','Grab your ankle, pull heel toward glutes','Keep knees together, hold gently']},
+    {name:'Hamstring Stretch', meta:'30s/leg', steps:['Sit or stand, extend one leg out','Hinge forward from the hips, back flat','Reach toward your toes until you feel a stretch']},
+    {name:'Hip Flexor Stretch', meta:'30s/leg', steps:['Step into a half-kneeling lunge position','Push hips forward gently','Keep torso upright, feel stretch in front of hip']},
+    {name:'Calf Stretch', meta:'30s/leg', steps:['Face a wall, hands against it','Step one foot back, heel flat on floor','Lean forward until you feel your calf stretch']},
+  ];
+  const WARMUP_RUN = [
+    {name:'Brisk Walk', meta:'3 min', steps:['Walk at a quick, purposeful pace','Let your body start to warm up naturally']},
+    {name:'Leg Swings (f/b)', meta:'10/leg', steps:['Hold something for balance','Swing one leg forward and back, controlled','Switch legs']},
+    {name:'Leg Swings (side/side)', meta:'10/leg', steps:['Same setup, swing leg side to side across your body','Switch legs']},
+    {name:'Walking Lunges (shallow)', meta:'8/leg', steps:['Step forward into a shallow lunge','Push through front heel to bring back leg forward','Keep it controlled, not deep']},
+    {name:'High Knees', meta:'20 sec', steps:['Jog in place, driving knees up to hip height','Keep it light and quick, not max effort']},
+    {name:'Butt Kicks (light)', meta:'20 sec', steps:['Jog in place, kicking heels toward glutes','Stay light on your feet']},
+    {name:'2–3 Easy Strides', meta:'20m each', steps:['Jog 20m, building from easy to a comfortable pace','Walk back and repeat 2–3 times']},
+  ];
+  const COOLDOWN_RUN = [
+    {name:'Walk it out', meta:'3–5 min', steps:['Slow to a walk immediately after finishing','Keep walking a few minutes, don\\'t stop abruptly']},
+    {name:'Quad Stretch', meta:'30s/leg', steps:['Stand holding a wall for balance','Grab your ankle, pull heel toward glutes','Keep knees together, hold gently']},
+    {name:'Hamstring Stretch', meta:'30s/leg', steps:['Sit or stand, extend one leg out','Hinge forward from the hips, back flat','Reach toward your toes until you feel a stretch']},
+    {name:'IT Band Stretch', meta:'30s/leg', steps:['Cross one leg behind the other','Lean your hip out to the side','Hold gently, feel the stretch on your outer thigh']},
+    {name:'Calf Stretch', meta:'30s/leg', steps:['Face a wall, hands against it','Step one foot back, heel flat on floor','Lean forward until you feel your calf stretch']},
+    {name:'Figure-4 Glute Stretch', meta:'30s/leg', steps:['Lie on your back, cross ankle over opposite knee','Pull the uncrossed thigh toward your chest','Feel the stretch in the glute of the crossed leg']},
+  ];
+
+  const PUSH_MAIN = [
+    {name:'Cable Chest Press', meta:'3×12', min:'~8 min', tip:'Controlled tempo, squeeze at end', steps:['Set cable handles at chest height','Press forward until arms extend, squeeze chest','Return with control — don\\'t let the weight slam']},
+    {name:'Dumbbell Shoulder Press', meta:'3×10', min:'~8 min', tip:'Avoid arching lower back', steps:['Sit or stand, dumbbells at shoulder height','Press straight overhead until arms extend','Lower with control, avoid arching your back']},
+    {name:'Incline Dumbbell Press', meta:'3×12', min:'~7 min', steps:['Set bench to a 30–45° incline','Press dumbbells up until arms extend','Lower slowly until you feel a stretch in your chest']},
+    {name:'Cable Tricep Pushdown', meta:'3×15', min:'~7 min', steps:['Grip the cable bar at chest height','Push down until arms fully extend','Keep elbows pinned to your sides throughout']},
+    {name:'Plank', meta:'3×30–45s', min:'~5 min', tip:'Core finisher', steps:['Forearms and toes on the floor','Keep body in a straight line, core tight','Hold — don\\'t let hips sag or pike up']},
+  ];
+  const LEGS_MAIN = [
+    {name:'Goblet Squat (shallow, 45°)', meta:'3×12', min:'~7 min', tip:'Controlled — no deep bend yet', steps:['Hold a dumbbell close to your chest','Squat down to about 45° knee bend only','Push through heels to stand back up']},
+    {name:'Leg Press (light–moderate)', meta:'3×12', min:'~7 min', steps:['Sit in the machine, feet shoulder-width on platform','Lower with control to a comfortable depth','Press back up without locking knees hard']},
+    {name:'Cable Hip Abduction', meta:'3×15/side', min:'~7 min', tip:'Prevents knee cave-in', steps:['Attach ankle cuff to a low cable','Stand sideways, kick leg out to the side','Control the return — this trains knee alignment']},
+    {name:'Hamstring Curl', meta:'3×12', min:'~6 min', tip:'ACL co-protector', steps:['Set up on the curl machine or cable','Curl heel toward glutes','Lower slowly — the slow part matters most']},
+    {name:'Cable Terminal Knee Extension', meta:'3×15', min:'~6 min', tip:'Direct ACL support', steps:['Loop band/cable behind your knee','Stand facing the anchor point','Straighten your knee against resistance, hold briefly']},
+    {name:'Standing Calf Raise', meta:'3×15', min:'~5 min', steps:['Stand on flat ground or edge of a step','Rise up onto your toes','Lower slowly past neutral for a full stretch']},
+    {name:'Single-Leg Balance Hold', meta:'2×30s/leg', min:'~3 min', tip:'Proprioception — key for ACL protection', steps:['Stand on one leg, slight knee bend','Keep hips level, core engaged','Hold steady — light hand on a wall if needed']},
+    {name:'Single-Leg RDL Reach', meta:'2×8/leg', min:'~3 min', tip:'Bodyweight balance + hamstring activation', steps:['Stand on one leg, soft knee','Hinge forward, reaching hand toward the floor','Keep back flat, return to standing with control']},
+  ];
+  const PULL_MAIN = [
+    {name:'Cable Lat Pulldown', meta:'3×12', min:'~8 min', steps:['Grip the bar wide, sit with thighs secured','Pull bar down to upper chest','Control the release back up']},
+    {name:'Dumbbell Bent-Over Row', meta:'3×12', min:'~8 min', steps:['Hinge at hips, back flat, dumbbells hanging','Pull elbows back, squeeze shoulder blades','Lower with control']},
+    {name:'Cable Face Pull', meta:'3×15', min:'~7 min', steps:['Set cable at face height with rope attachment','Pull toward your face, elbows high','Squeeze shoulder blades together at the end']},
+    {name:'Dumbbell Bicep Curl', meta:'3×12', min:'~7 min', steps:['Stand, dumbbells at your sides','Curl up without swinging your body','Lower slowly all the way down']},
+    {name:'Cable Core Rotation', meta:'3×12/side', min:'~6 min', steps:['Set cable at chest height, stand sideways','Rotate torso away from the machine','Control the return, keep hips mostly still']},
+  ];
+
+  function getRunStage(weekNum) {
+    if (weekNum <= 2) return {stage:'Week 1–2', main:'1 min jog / 2 min walk × 8', sub:'~24 min total'};
+    if (weekNum <= 4) return {stage:'Week 3–4', main:'2 min jog / 2 min walk × 6', sub:'~24 min total'};
+    if (weekNum <= 6) return {stage:'Week 5–6', main:'4 min jog / 1 min walk × 5', sub:'~25 min total'};
+    return {stage:'Week 7+', main:'Continuous easy jog', sub:'20–25 min'};
+  }
+
+  function fmt(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+  function isRestDay(dow) { return dow === 1 || dow === 6; }
+  function getWeekNum(d) {
+    const diff = Math.floor((d - START_DATE) / (1000*60*60*24));
+    return Math.max(1, Math.floor(diff/7) + 1);
+  }
+
+  function loadHistory() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; } }
+  function saveHistory(h) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(h)); } catch(e){ console.error(e); } }
+
+  let history = {};
+  let selectedDow = new Date().getDay();
+
+  function updateBanner() {
+    const today = new Date();
+    const wk = getWeekNum(today);
+    document.getElementById('week-num').textContent = 'Week ' + wk;
+    const stage = getRunStage(wk);
+    document.getElementById('stage-value').textContent = stage.main;
+    document.getElementById('stage-detail').textContent = stage.stage + ' · ' + stage.sub;
+  }
+
+  function computeStats() {
     const today = new Date(); today.setHours(0,0,0,0);
-    const diff = Math.ceil((RACE_DATE - today) / (1000*60*60*24));
-    document.getElementById('days-left').textContent = diff;
-    document.getElementById('hm-date-sub').textContent = 'days until 24 October 2026 · Jakarta HM 🇮🇩';
-  }
-
-  // ---- localStorage ----
-  function loadHistory() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
-    catch { return {}; }
-  }
-
-  function saveHistory(h) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(h)); }
-    catch(e) { console.error(e); }
-  }
-
-  function todayKey() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-
-  // ---- Stats ----
-  function computeStats(history) {
-    const today = new Date(); today.setHours(0,0,0,0);
-    const total = Object.keys(history).filter(k => history[k]).length;
     let streak = 0;
-    for (let i = 0; i < 365; i++) {
-      const d = new Date(today); d.setDate(d.getDate() - i);
-      const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      if (history[k]) streak++; else break;
+    for (let i=0;i<365;i++) {
+      const d = new Date(today); d.setDate(d.getDate()-i);
+      if (isRestDay(d.getDay())) continue;
+      if (history[fmt(d)]) streak++; else break;
     }
+    const total = Object.keys(history).filter(k=>history[k]).length;
     const dow = today.getDay();
-    const monOffset = dow === 0 ? -6 : 1 - dow;
+    const monOffset = dow===0 ? -6 : 1-dow;
+    const monday = new Date(today); monday.setDate(today.getDate()+monOffset);
     let weekDone = 0;
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(today); d.setDate(d.getDate() + monOffset + i);
-      const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      if (history[k]) weekDone++;
+    for (let i=0;i<7;i++) {
+      const d = new Date(monday); d.setDate(monday.getDate()+i);
+      if (isRestDay(d.getDay())) continue;
+      if (history[fmt(d)]) weekDone++;
     }
-    return { total, streak, weekDone };
+    return { streak, total, weekDone };
   }
 
-  function updateStats(history) {
-    const { total, streak, weekDone } = computeStats(history);
+  function updateStats() {
+    const { streak, total, weekDone } = computeStats();
     document.getElementById('stat-streak').textContent = streak;
     document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-week').textContent = `${weekDone}/7`;
+    document.getElementById('stat-week').textContent = weekDone + '/5';
   }
 
-  // ---- Heatmap ----
-  function buildHeatmap(history) {
+  function buildHeatmap() {
     const grid = document.getElementById('heatmap');
     grid.innerHTML = '';
     ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(d => {
-      const el = document.createElement('div');
-      el.className = 'day-label';
-      el.textContent = d;
-      grid.appendChild(el);
+      const el = document.createElement('div'); el.className='day-label'; el.textContent=d; grid.appendChild(el);
     });
     const today = new Date(); today.setHours(0,0,0,0);
     const dow = today.getDay();
-    const monOffset = dow === 0 ? -6 : 1 - dow;
-    const thisMonday = new Date(today); thisMonday.setDate(today.getDate() + monOffset);
-    const startDay = new Date(thisMonday); startDay.setDate(thisMonday.getDate() - 28);
-    for (let i = 0; i < 35; i++) {
-      const d = new Date(startDay); d.setDate(startDay.getDate() + i);
-      const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const monOffset = dow===0 ? -6 : 1-dow;
+    const thisMonday = new Date(today); thisMonday.setDate(today.getDate()+monOffset);
+    const startDay = new Date(thisMonday); startDay.setDate(thisMonday.getDate()-28);
+    for (let i=0;i<35;i++) {
+      const d = new Date(startDay); d.setDate(startDay.getDate()+i);
       const isFuture = d > today;
       const isToday = d.getTime() === today.getTime();
-      const isDone = !!history[k];
+      const isDone = !!history[fmt(d)];
+      const rest = isRestDay(d.getDay());
       const cell = document.createElement('div');
-      cell.className = 'day-cell' + (isFuture?' future':'') + (isToday?' today':'') + (isDone?' done':'');
+      cell.className = 'day-cell' + (isFuture?' future':'') + (isToday?' today':'') + (isDone?' done':'') + (rest && !isDone ?' rest':'');
       cell.textContent = d.getDate();
-      cell.title = k + (isDone ? ' ✓' : '');
+      cell.title = fmt(d) + (isDone?' ✓':'') + (rest?' (rest)':'');
       grid.appendChild(cell);
     }
   }
 
-  // ---- Mark done ----
-  let history = {};
-
-  function markDayDone() {
-    const key = todayKey();
-    if (history[key]) return;
-    history[key] = true;
-    saveHistory(history);
-    updateStats(history);
-    buildHeatmap(history);
-    updateDoneBtn();
-  }
-
-  function updateDoneBtn() {
-    const btn = document.getElementById('done-btn');
-    if (history[todayKey()]) {
-      btn.textContent = '✓ Today Completed!';
-      btn.classList.add('completed');
-    } else {
-      btn.textContent = '✓ Mark Today as Complete';
-      btn.classList.remove('completed');
-    }
-  }
-
-  // ---- Checklist ----
-  function toggleCheck(row) {
-    row.classList.toggle('done');
-    row.querySelector('.check-box').textContent = row.classList.contains('done') ? '✓' : '';
-  }
-
-  function resetChecklist() {
-    document.querySelectorAll('.checklist-row').forEach(r => {
-      r.classList.remove('done');
-      r.querySelector('.check-box').textContent = '✓';
-    });
-  }
-
-  // ---- Tabs ----
   function switchTab(id) {
-    const ids = ['daily','phase1','phase2','rules'];
-    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ids[i]===id));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    const ids = ['today','guide','schedule','knee'];
+    document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active', ids[i]===id));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-'+id).classList.add('active');
   }
 
-  // ---- Phase Toggle ----
-  function switchPhase(phase) {
-    document.querySelectorAll('.ptoggle-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector('.ptoggle-btn.'+phase).classList.add('active');
-    document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('daily-'+phase).classList.add('active');
-    resetChecklist();
-  }
-
-  // ---- Build Checklists ----
-  const p1morning = [
-    { label: 'Quad Sets', meta: '3×15, 10s hold' },
-    { label: 'Straight Leg Raises', meta: '3×12, 5s hold' },
-    { label: 'Clamshells', meta: '3×15 each side' },
-    { label: 'Side-Lying Leg Raises', meta: '3×12 each side' },
-  ];
-  const p1evening = [
-    { label: 'Quad Sets', meta: '3×15, 10s hold' },
-    { label: 'Straight Leg Raises', meta: '3×12, 5s hold' },
-    { label: 'Glute Bridges', meta: '3×12, 5s hold' },
-    { label: 'Calf Raises', meta: '3×15' },
-    { label: 'Prone Heel Slides', meta: '3×10, 5s hold' },
-  ];
-  const p2morning = [
-    { label: 'Quad Sets', meta: '3×15, 10s hold' },
-    { label: 'Straight Leg Raises', meta: '3×12, 5s hold' },
-    { label: 'Short Arc Quads', meta: '3×15, 5s hold' },
-    { label: 'Clamshells', meta: '3×15 each side' },
-  ];
-  const p2evening = [
-    { label: 'Quad Sets', meta: '3×15, 10s hold' },
-    { label: 'Straight Leg Raises', meta: '3×12, 5s hold' },
-    { label: 'Wall Sits (Shallow)', meta: '3× hold 30s' },
-    { label: 'Terminal Knee Extensions', meta: '3×15 with band' },
-    { label: 'Single Leg Glute Bridge', meta: '3×10' },
-    { label: 'Standing Hamstring Curls', meta: '3×12' },
-    { label: 'Calf Raises', meta: '3×15' },
-  ];
-
-  function buildList(data, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    data.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'checklist-row';
-      row.onclick = function() { toggleCheck(this); };
-      row.innerHTML = `<div class="check-box">✓</div><div class="check-label">${item.label}</div><div class="check-meta">${item.meta}</div>`;
-      container.appendChild(row);
+  function buildDayPills() {
+    const container = document.getElementById('day-pills');
+    container.innerHTML = '';
+    const todayDow = new Date().getDay();
+    const order = [1,2,3,4,5,6,0];
+    order.forEach(dow => {
+      const type = DAY_TYPE[dow];
+      const pill = document.createElement('div');
+      pill.className = 'day-pill' + (dow===selectedDow?' selected':'') + (type==='rest'?' rest-type':'') + (dow===todayDow?' is-today':'');
+      pill.onclick = () => { selectedDow = dow; buildDayPills(); renderSession(); };
+      pill.innerHTML = `<div class="pill-day">${DAY_SHORT[dow]}</div><div class="pill-type">${TYPE_LABEL[type]}</div>`;
+      container.appendChild(pill);
     });
   }
 
-  // ---- Init ----
+  function toggleCheck(row) {
+    row.classList.toggle('done');
+    row.querySelector('.wo-check').textContent = row.classList.contains('done') ? '✓' : '';
+  }
+
+  function makeSection(title, timeLabel, items, extraClass) {
+    const card = document.createElement('div');
+    card.className = 'section-card' + (extraClass?(' '+extraClass):'');
+    const head = document.createElement('div');
+    head.className = 'section-head';
+    head.innerHTML = `<div class="section-title">${title}</div><div class="section-time">${timeLabel}</div>`;
+    card.appendChild(head);
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'wo-row';
+      row.onclick = function(){ toggleCheck(this); };
+      row.innerHTML = `
+        <div class="wo-check">✓</div>
+        <div class="wo-body">
+          <div class="wo-name">${item.name}</div>
+          ${item.tip ? `<div class="wo-tip">${item.tip}</div>` : ''}
+        </div>
+        <div class="wo-meta">
+          <div class="wo-sets">${item.meta}</div>
+          ${item.min ? `<div class="wo-min">${item.min}</div>` : ''}
+        </div>`;
+      card.appendChild(row);
+    });
+    return card;
+  }
+
+  function renderSession() {
+    const container = document.getElementById('session-content');
+    container.innerHTML = '';
+    const type = DAY_TYPE[selectedDow];
+    const todayDow = new Date().getDay();
+    const isPreview = selectedDow !== todayDow;
+
+    if (type === 'rest') {
+      const head = document.createElement('div');
+      head.className = 'rest-card';
+      head.innerHTML = `<div class="rest-emoji">😴</div><div class="session-title">Rest Day</div><div class="rest-text">Let the muscles and knee recover. Light walking is fine — no structured exercise needed. This day doesn't break your streak.</div>`;
+      container.appendChild(head);
+      return;
+    }
+
+    const head = document.createElement('div');
+    head.className = 'session-head';
+    let title, timeNote, note;
+    if (type === 'push') { title = '💪 Push — Upper Body A'; timeNote = '⏱️ ~52 min total · fits your 1-hour slot'; note = 'Office gym, 6–7 PM'; }
+    else if (type === 'legs') { title = '🦵 Legs — Knee Focus'; timeNote = '⏱️ ~60 min total · fits your 1-hour slot'; note = 'Office gym, 6–7 PM'; }
+    else if (type === 'pull') { title = '🔙 Pull — Upper Body B'; timeNote = '⏱️ ~52 min total · fits your 1-hour slot'; note = 'Office gym, 6–7 PM'; }
+    else if (type === 'run' && selectedDow === 5) { title = '🏃 Run — Club Session'; timeNote = '⏱️ ~44 min run · then coffee chat ☕'; note = '6:30–7:30 AM with the running club'; }
+    else { title = '🏃 Run — CFD Sudirman'; timeNote = '⏱️ ~44 min total'; note = 'Easy pace, no rush 🎉'; }
+    head.innerHTML = `<div class="session-title">${title}</div><div class="session-time">${timeNote}</div><div class="session-note">${note}</div>`;
+    container.appendChild(head);
+
+    if (type === 'push' || type === 'legs' || type === 'pull') {
+      container.appendChild(makeSection('🔥 Warm-Up', '~8 min', WARMUP_GYM));
+      const main = type==='push' ? PUSH_MAIN : type==='legs' ? LEGS_MAIN : PULL_MAIN;
+      const mainTime = type==='legs' ? '~44 min' : '~36–38 min';
+      container.appendChild(makeSection('💪 Main Workout', mainTime, main, 'main'));
+      container.appendChild(makeSection('❄️ Cool Down', '~8 min', COOLDOWN_GYM, 'cooldown'));
+    } else {
+      const wk = getWeekNum(new Date());
+      const stage = getRunStage(wk);
+      container.appendChild(makeSection('🔥 Warm-Up', '~10 min', WARMUP_RUN));
+      const intCard = document.createElement('div');
+      intCard.className = 'section-card main';
+      intCard.innerHTML = `<div class="section-head"><div class="section-title">🏃 Run-Walk Intervals</div><div class="section-time">${stage.sub}</div></div>
+        <div class="interval-card">
+          <div class="interval-stage">${stage.stage}</div>
+          <div class="interval-main">${stage.main}</div>
+          <div class="interval-sub">Conversational pace — you should be able to chat during jog portions</div>
+        </div>`;
+      container.appendChild(intCard);
+      container.appendChild(makeSection('❄️ Cool Down', '~10–12 min', COOLDOWN_RUN, 'cooldown'));
+    }
+
+    const key = fmt(new Date());
+    if (isPreview) {
+      const note = document.createElement('div');
+      note.className = 'preview-note';
+      note.textContent = '👀 Previewing ' + DAY_SHORT[selectedDow] + ' — switch to today to log completion';
+      container.appendChild(note);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'done-btn' + (history[key] ? ' completed' : '');
+      btn.textContent = history[key] ? '✓ Session Completed!' : '✓ Mark Session as Complete';
+      btn.onclick = () => {
+        if (history[key]) return;
+        history[key] = true;
+        saveHistory(history);
+        updateStats();
+        buildHeatmap();
+        renderSession();
+      };
+      container.appendChild(btn);
+    }
+  }
+
+  function makeGuideCard(item) {
+    const stepsHtml = (item.steps||[]).map((s,i) => `
+      <div class="g-step"><div class="g-dot">${i+1}</div><div class="g-text">${s}</div></div>
+    `).join('');
+    const card = document.createElement('div');
+    card.className = 'g-card';
+    card.innerHTML = `
+      <div class="g-top">
+        <div class="g-name">${item.name}</div>
+        <div class="g-badge">${item.meta}</div>
+      </div>
+      <details class="g-details"><summary></summary>
+        <div class="g-steps">${stepsHtml}</div>
+      </details>`;
+    return card;
+  }
+
+  function buildGuide() {
+    const container = document.getElementById('guide-content');
+    container.innerHTML = '';
+    const sections = [
+      ['🔥 Warm-Up — Gym Days', WARMUP_GYM],
+      ['💪 Push Day Exercises', PUSH_MAIN],
+      ['🦵 Legs Day Exercises', LEGS_MAIN],
+      ['🔙 Pull Day Exercises', PULL_MAIN],
+      ['❄️ Cool Down — Gym Days', COOLDOWN_GYM],
+      ['🔥 Warm-Up — Run Days', WARMUP_RUN],
+      ['❄️ Cool Down — Run Days', COOLDOWN_RUN],
+    ];
+    sections.forEach(([label, items]) => {
+      const h = document.createElement('div');
+      h.className = 'guide-section-label';
+      h.textContent = label;
+      container.appendChild(h);
+      items.forEach(item => container.appendChild(makeGuideCard(item)));
+    });
+  }
+
   function init() {
-    updateCountdown();
-    buildList(p1morning, 'checklist-morning-p1');
-    buildList(p1evening, 'checklist-evening-p1');
-    buildList(p2morning, 'checklist-morning-p2');
-    buildList(p2evening, 'checklist-evening-p2');
     history = loadHistory();
-    updateStats(history);
-    buildHeatmap(history);
-    updateDoneBtn();
+    updateBanner();
+    updateStats();
+    buildHeatmap();
+    buildDayPills();
+    renderSession();
+    buildGuide();
   }
 
   init();
